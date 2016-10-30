@@ -2,6 +2,7 @@ package com.omrani.javabrains.dao;
 
 import com.omrani.javabrains.model.Cicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -19,6 +20,7 @@ public class JdbcDaoImpl {
 
 
 
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
     private final DataSource dataSource;
 
 
@@ -33,6 +35,8 @@ public class JdbcDaoImpl {
 
         try {
             conn =  dataSource.getConnection();
+
+
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM test WHERE id = ?");
             statement.setInt(1,circleId);
             Cicle cicle =null;
@@ -55,10 +59,23 @@ public class JdbcDaoImpl {
 
 
     }
+
+    public int getCircleCount(){
+        String sql = "SELECT COUNT(*) FROM springHybernate.test";
+        jdbcTemplate.setDataSource(getDataSource());
+        return jdbcTemplate.queryForObject(sql,Integer.class);
+    }
+
     public DataSource getDataSource() {
         return dataSource;
     }
 
 
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
 
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 }

@@ -15,8 +15,10 @@ public class jdbcDemo {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/spring.xml");
         JdbcDaoImpl dao = context.getBean("jdbcDaoImpl",JdbcDaoImpl.class);
-        Cicle cicle = dao.getCircle(1);
-        System.out.println(cicle.getName());
+
+        System.out.println(dao.getCircleCount());
+//        Cicle cicle = dao.getCircle(1);
+//        System.out.println(cicle.getName());
     }
 
 }
