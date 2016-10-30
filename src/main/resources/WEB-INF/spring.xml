@@ -27,7 +27,7 @@
 
 
 
-//first test for spring
+//first test for springs
 
     <bean id="parentTriangle" class="com.omrani.javabrains.Triangle">
         <property name="pointA" ref="pointA"/>
